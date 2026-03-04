@@ -1,12 +1,9 @@
-// consts
-const myLibrary = []
+// Variables
+let myLibrary = [];
 const addBookBtn = document.querySelector('#submit-book');
 const bookCards = document.querySelector('#book-cards');
 const dialog = document.querySelector('#book-dialog');
 const newBookBtn = document.querySelector('#new-book');
-
-// lets
-
 
 // Objects
 function Book(title, author, pages, read){
@@ -26,7 +23,9 @@ function addBookToLibrary(title, author, pages, read){
 }
 
 function displayBooks(){
+    bookCards.innerHTML = '';
     myLibrary.forEach((book) => {
+        // Create Book Information Card
         const card = document.createElement('div');
         card.classList.add('card');
         const title = document.createElement('p');
@@ -35,22 +34,41 @@ function displayBooks(){
         author.textContent = book.author;
         const pages = document.createElement('p');
         pages.textContent = book.pages;
-        const read = document.createElement('input');
-        read.type = 'checkbox';
-        read.checked = book.read;
+        const readBook = document.createElement('button');
+        readBook.textContent =  book.read ? 'Read' : 'Not Read';
+        readBook.addEventListener('click', () => {
+            book.toggleRead();
+            displayBooks();
+        });
+        const removeBook = document.createElement('button');
+        // Create a remove book card on each created book card
+        removeBook.classList.add('remove-btn');
+        removeBook.textContent = 'Remove Book';
+        card.dataset.id = book.id //give each book card an id to then identify which card to delete
+        // Give functionality to the Remove Card btn
+        removeBook.addEventListener('click', () => {
+            myLibrary = myLibrary.filter(book => book.id !== card.dataset.id);
+            displayBooks();
+        })
+        // Appending and Creating book card
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
-        card.appendChild(read);
+        card.appendChild(readBook);
+        card.appendChild(removeBook);
         bookCards.appendChild(card);
     });
+
 };
+
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
 
 newBookBtn.addEventListener('click', () => dialog.showModal());
 
-
 addBookBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevents the submit btn to send data to a server and refreshing
     const title = document.querySelector('#Title').value;
     const author = document.querySelector('#Author').value;
     const pages = document.querySelector('#Pages').value;
@@ -58,4 +76,8 @@ addBookBtn.addEventListener('click', (e) => {
     addBookToLibrary(title, author, pages, read);
     displayBooks();
     dialog.close();
+    document.querySelector('#Title').value = '';
+    document.querySelector('#Author').value = '';
+    document.querySelector('#Pages').value = '';
+    document.querySelector('#Read').checked = false;
 });

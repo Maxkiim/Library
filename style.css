@@ -1,10 +1,91 @@
+body {
+    padding: 30px;
+    background-color: #F9FAFB;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.navbar {
+    width: 100%;
+}
+nav h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 2.5rem;
+}
+nav h1 svg {
+    color: #165DFC;
+    height: 40px;
+    width: 40px;
+}
+#new-book {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: white;
+    background-color: #165DFC;
+    border-radius: 10px;
+    border: 0;
+    height: 3.5em;
+    width: 10em;
+    font-size: 15px;
+    font-weight: 600;
+}
+.hidden {
+    display: none !important;
+}
+#book-dialog {
+    min-height: 60vh;
+    max-width: 80%;
+    margin-top: 10px;
+}
+#book-dialog form {
+    display: flex;
+    flex-direction: column;
+}
+#book-dialog form label {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+}
+#book-dialog form input {
+    margin: 5px 0;
+    height: 30px;
+    font-size: 20px;
+}
+.checkbox-read {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    padding-left: 5px;
+    gap: 10px;
+}
+.form-btns {
+    display: flex;
+    gap: 30px;
+}
+#submit-book {
+    background-color: #165DFC;
+    color: white;
+}
+.form-btns button {
+    height: 3.5em;
+    width: 15em;
+    border-radius: 10px;
+    border: none;
+
+}
 .card {
     font-size: 20px;
-    width: 10em;
-    height: 20em;
+    width: 20em;
+    height: 10em;
     border: solid 2px black;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 30px;
+}
+.card p {
+    margin: 0;
 }

@@ -1,3 +1,6 @@
+//icons
+lucide.createIcons();
+
 // Variables
 let myLibrary = [];
 const addBookBtn = document.querySelector('#submit-book');
@@ -28,12 +31,14 @@ function displayBooks(){
         // Create Book Information Card
         const card = document.createElement('div');
         card.classList.add('card');
-        const title = document.createElement('p');
+        const title = document.createElement('h3');
         title.textContent = book.title;
         const author = document.createElement('p');
+        author.classList.add('author');
         author.textContent = book.author;
         const pages = document.createElement('p');
-        pages.textContent = book.pages;
+        pages.textContent = 'Pages:' + book.pages;
+        // Create a toggle button that shows if the book was read
         const readBook = document.createElement('button');
         readBook.textContent =  book.read ? 'Read' : 'Not Read';
         readBook.addEventListener('click', () => {
@@ -58,14 +63,17 @@ function displayBooks(){
         card.appendChild(removeBook);
         bookCards.appendChild(card);
     });
-
 };
+function toggleDisplay(){
+    dialog.classList.toggle('hidden');
+    newBookBtn.classList.toggle('hidden');
+}
 
 Book.prototype.toggleRead = function() {
     this.read = !this.read;
 }
 
-newBookBtn.addEventListener('click', () => dialog.showModal());
+newBookBtn.addEventListener('click', () => toggleDisplay());
 
 addBookBtn.addEventListener('click', (e) => {
     e.preventDefault(); // Prevents the submit btn to send data to a server and refreshing
@@ -75,7 +83,8 @@ addBookBtn.addEventListener('click', (e) => {
     const read = document.querySelector('#Read').checked;
     addBookToLibrary(title, author, pages, read);
     displayBooks();
-    dialog.close();
+    toggleDisplay();
+    // Reset the form so its empty when adding new book
     document.querySelector('#Title').value = '';
     document.querySelector('#Author').value = '';
     document.querySelector('#Pages').value = '';

@@ -75,17 +75,51 @@ nav h1 svg {
     width: 15em;
     border-radius: 10px;
     border: none;
-
 }
 .card {
     font-size: 20px;
     width: 20em;
-    height: 10em;
-    border: solid 2px black;
+    min-height: 8em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: start;
     padding: 30px;
+    border: 1px solid #8e8f8f;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-.card p {
+.card p , .card h3{
     margin: 0;
+}
+.card p.author {
+    font-size: 15px;
+    color: #5c5c5c;
+    margin: 10px 0;
+}
+.pagesBox {
+    display: flex;
+    align-items: center;
+    height: 15px;
+    padding-top: 30px;
+    gap: 5px;
+}
+.readBox {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+.remove-btn {
+    height: 20px;
+    width: 20px;
+    background: none;
+    border: none;
+    color: red;
+}
+#book-cards {
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2, 30em);
+    align-content: start;
+    overflow: hidden;
 }
